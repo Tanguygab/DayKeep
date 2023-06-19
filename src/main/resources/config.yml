@@ -1,15 +1,17 @@
 day:
-  in: "&aTrời sáng trong &6@s &agiây"
+  in: "&aTrời sáng trong &6%s &agiây"
   is: "&aTrời đã sáng, chết sẽ không mất đồ!"
   title: "&aTrời đã sáng"
   subtitle: "&achết sẽ không mất đồ!"
+  soundIn: BLOCK_NOTE_BLOCK_BELL
   sound: BLOCK_NOTE_BLOCK_BELL
 
 night:
-  in: "&cTrời tối trong &6@s &cgiây"
+  in: "&cTrời tối trong &6%s &cgiây"
   is: "&cTrời đã tối, chết sẽ mất đồ!"
   title: "&cTrời đã tối"
   subtitle: "&cchết sẽ mất đồ!"
+  soundIn: AMBIENT_CAVE
   sound: AMBIENT_CAVE
 
 fadeIn: 5

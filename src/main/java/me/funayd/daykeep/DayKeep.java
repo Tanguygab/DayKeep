@@ -19,15 +19,17 @@ public class DayKeep extends JavaPlugin {
 
     private String dayIn;
     private String day;
-    private Sound daySound;
     private String dayTitle;
     private String daySubTitle;
+    private Sound daySoundIn;
+    private Sound daySound;
 
     private String nightIn;
     private String night;
-    private Sound nightSound;
     private String nightTitle;
     private String nightSubTitle;
+    private Sound nightSoundIn;
+    private Sound nightSound;
 
     private int fadeIn;
     private int stay;
@@ -50,13 +52,13 @@ public class DayKeep extends JavaPlugin {
     public void setDay(World world) {
         isDay.add(world);
         for (int i = 5; i >= 0; i--)
-            task(world,i == 0 ? day : dayIn,dayTitle,daySubTitle,daySound,true,i);
+            task(world,i == 0 ? day : dayIn,dayTitle,daySubTitle,i == 0 ? daySound : daySoundIn,true,i);
     }
 
     public void setNight(World world) {
         isDay.remove(world);
         for (int i = 5; i >= 0; i--)
-            task(world,i == 0 ? night : nightIn,nightTitle,nightSubTitle,nightSound,false,i);
+            task(world,i == 0 ? night : nightIn,nightTitle,nightSubTitle,i == 0 ? nightSound : nightSoundIn,false,i);
     }
 
     private void task(World world, String message, String title, String subtitle, Sound sound, boolean keepInventory, int i) {
@@ -80,8 +82,8 @@ public class DayKeep extends JavaPlugin {
         day = get(dayCfg,"is","&aTrời đã sáng, chết sẽ không mất đồ!");
         dayTitle = get(dayCfg,"title","&6Trời đã sáng");
         daySubTitle = get(dayCfg,"subtitle","&achết sẽ không mất đồ!");
-        try {daySound = Sound.valueOf(dayCfg.getString("sound", "BLOCK_NOTE_BLOCK_BELL"));}
-        catch (Exception e) {daySound = Sound.BLOCK_NOTE_BLOCK_BELL;}
+        daySoundIn = get(dayCfg,"soundIn",Sound.BLOCK_NOTE_BLOCK_BELL);
+        daySound = get(dayCfg,"sound",Sound.BLOCK_NOTE_BLOCK_BELL);
 
         ConfigurationSection nightCfg = config.getConfigurationSection("night");
         assert nightCfg != null;
@@ -89,8 +91,8 @@ public class DayKeep extends JavaPlugin {
         night = get(nightCfg,"is","&cTrời đã tối, chết sẽ mất đồ!");
         nightTitle = get(nightCfg,"title","&cTrời đã tối");
         nightSubTitle = get(nightCfg,"subtitle","&cchết sẽ mất đồ!");
-        try {nightSound = Sound.valueOf(nightCfg.getString("sound", "BLOCK_NOTE_BLOCK_BELL"));}
-        catch (Exception e) {nightSound = Sound.AMBIENT_CAVE;}
+        nightSoundIn = get(nightCfg,"soundIn",Sound.AMBIENT_CAVE);
+        nightSound = get(nightCfg,"sound",Sound.AMBIENT_CAVE);
 
         fadeIn = config.getInt("fadeIn",5);
         stay = config.getInt("stay",20);
@@ -99,6 +101,10 @@ public class DayKeep extends JavaPlugin {
 
     private String get(ConfigurationSection section, String path, String def) {
         return ChatColor.translateAlternateColorCodes('&',section.getString(path,def));
+    }
+    private Sound get(ConfigurationSection section, String path, Sound def) {
+        try {return Sound.valueOf(section.getString(path, def.toString()));}
+        catch (Exception e) {return def;}
     }
 
     @Override
