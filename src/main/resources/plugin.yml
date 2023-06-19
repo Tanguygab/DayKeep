@@ -1,6 +1,6 @@
 name: DayKeep
 version: '${version}'
-main: me.funayd.daykeep.Daykeep
+main: me.funayd.daykeep.DayKeep
 api-version: '1.20'
 authors: [funayd]
 commands:
