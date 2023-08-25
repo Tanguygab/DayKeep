@@ -1,8 +1,8 @@
 name: DayKeep
 version: '${version}'
-main: me.funayd.daykeep.DayKeep
+main: io.github.tanguygab.daykeep.DayKeep
 api-version: '1.20'
-authors: [funayd]
+authors: [Tanguygab, funayd]
 commands:
   daykeep-reload:
     permission: daykeep.admin

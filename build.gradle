@@ -2,8 +2,8 @@ plugins {
     id 'java'
 }
 
-group = 'me.funayd'
-version = '2.0.0'
+group = 'io.github.tanguygab'
+version = '2.0.1'
 
 compileJava.options.encoding = 'UTF-8'
 
